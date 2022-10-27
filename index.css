@@ -1,0 +1,65 @@
+caption {
+    text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 1em;
+}
+
+div,
+#message {
+    text-align: center;
+}
+
+table {
+    margin: 2em auto;
+    border-collapse: collapse;
+}
+
+#board td:nth-child(odd) {
+    width: 8px;
+}
+
+#board td:nth-child(even) {
+    width: 36px;
+}
+
+#board tr:nth-child(odd) {
+    height: 8px;
+}
+
+#board tr:nth-child(even) {
+    height: 36px;
+}
+
+input[type="number"] {
+    width: 3em;
+}
+
+#results {
+    width: 10em;
+}
+
+#results td,
+#results th {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.VERTEX,
+.CLOSED_BORDER {
+    background-color: black;
+}
+
+.OPEN_BORDER,
+.EMPTY {
+    background-color: white;
+}
+
+.PLAYER1,
+.OPEN_BORDER:hover {
+    background-color: red;
+}
+
+.PLAYER2 {
+    background-color: blue;
+}
