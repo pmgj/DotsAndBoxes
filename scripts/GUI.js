@@ -42,7 +42,7 @@ class GUI {
     }
     createTable() {
         let form = document.forms[0];
-        this.game = new DotsAndBoxes(parseInt(form.numRow.value), parseInt(form.numCol.value));
+        this.game = new DotsAndBoxes(form.numRow.valueAsNumber, form.numCol.valueAsNumber);
         let board = this.game.getBoard();
         this.updateTable(board);
     }

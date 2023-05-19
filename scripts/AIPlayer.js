@@ -14,8 +14,8 @@ export default class AIPlayer {
         if (cell) {
             let zz = this.sides01();
             if (zz) {
-                //         takeall3s();
-                //         takeedge(zz, x, y);
+                takeall3s();
+                takeedge(zz, x, y);
             } else {
                 //         sac(cell.x, cell.y);
             }
@@ -27,6 +27,27 @@ export default class AIPlayer {
         // else if (singleton()) takeedge(zz, x, y);
         // else if (doubleton()) takeedge(zz, x, y);
         // else makeanymove();
+    }
+    takeedge(zz, x, y) { //Set hedge if zz=1 and vedge if zz=2.
+        if (zz > 1) this.board[x][y] = CellState.CLOSED_BORDER;
+        else this.board[x][y] = CellState.CLOSED_BORDER;
+    }
+    takebox(i, j) {
+        if (this.board[i - 1][j] === CellState.OPEN_BORDER) this.board[i - 1][j] = CellState.CLOSED_BORDER;
+        else if (this.board[i][j - 1] === CellState.OPEN_BORDER) this.board[i][j - 1] = CellState.CLOSED_BORDER;
+        else if (this.board[i + 1][j] === CellState.OPEN_BORDER) this.board[i + 1][j] = CellState.CLOSED_BORDER;
+        else this.board[i][j + 1] = CellState.CLOSED_BORDER;
+    }
+    takeall3s() {
+        let cell;
+        do {
+            cell = this.sides3();
+            if (cell) {
+                let { x: u, y: v } = cell;
+                this.takebox(u, v);
+            }
+        } while (cell);
+        // while (this.sides3()) this.takebox(u, v);
     }
     safehedge(i, j) { //Returns true if (i,j) is a safe hedge
         if (this.board[i - 1][j] === CellState.OPEN_BORDER) {
@@ -76,10 +97,10 @@ export default class AIPlayer {
                 if (y > this.n) {
                     y = 0;
                     x += 2;
-                    if (x == this.m) x = 0;
+                    if (x === this.m) x = 0;
                 }
             }
-        } while (x != i || y != j);
+        } while (x !== i || y !== j);
         return false
     }
     sides01() { //Returns true and zz,x,y if there is a safe edge(x,y).
@@ -87,16 +108,16 @@ export default class AIPlayer {
         let i = Math.random() * this.m | 1;
         let j = Math.random() * this.n | 1;
         if (zz === 1) {
-            if (randhedge(i, j)) return zz;
+            if (this.randhedge(i, j)) return zz;
             else {
                 zz = 2;
-                if (randvedge(i, j)) return zz;
+                if (this.randvedge(i, j)) return zz;
             }
         } else {
-            if (randvedge(i, j)) return zz;
+            if (this.randvedge(i, j)) return zz;
             else {
                 zz = 1;
-                if (randhedge(i, j)) return zz;
+                if (this.randhedge(i, j)) return zz;
             }
         }
         return false;
@@ -136,8 +157,8 @@ export default class AIPlayer {
 
 let model = new DotsAndBoxes(4, 4);
 model.play(new Cell(2, 1));
-model.play(new Cell(0, 1));
-model.play(new Cell(1, 0));
+// model.play(new Cell(0, 1));
+// model.play(new Cell(1, 0));
 let player = new AIPlayer(model.getBoard());
 player.makemove();
 console.table(model.getBoard());
