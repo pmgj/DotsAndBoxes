@@ -1,7 +1,7 @@
 caption {
     text-align: center;
     font-weight: bold;
-    font-size: xx-large;
+    font-size: x-large;
     margin-bottom: 1em;
 }
 
@@ -37,12 +37,6 @@ input[type="number"] {
 
 #results {
     width: 10em;
-}
-
-#results td,
-#results th {
-    border: 1px solid black;
-    text-align: center;
 }
 
 .VERTEX,
